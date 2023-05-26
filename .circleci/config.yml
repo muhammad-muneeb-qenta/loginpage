@@ -19,7 +19,7 @@ jobs:
       - store_test_results:
           path: /tests_output
       - run:
-          name: Check Test Result
+          name: Check test results
           command: |
             if [ $? -eq 0 ]; then
               echo "Tests passed, proceeding with code upload"
