@@ -16,8 +16,20 @@ jobs:
       - node/install-packages
       - run:
           command: npm run test
+       - run:
+          name: Check Test Result
+          command: |
+            if [ $? -eq 0 ]; then
+              echo "Tests passed, proceeding with code upload"
+            else
+              echo "Tests failed, code upload aborted"
+              exit 1
+            fi
       - store_test_results:
           path: /tests_output
+
+
+
 workflows:
   e2e-test:
     jobs:
