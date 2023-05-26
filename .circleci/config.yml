@@ -27,8 +27,6 @@ jobs:
               echo "Tests failed, code upload aborted"
               circleci step halt
             fi
-
-      # Deployment step to push code to GitHub
       - deploy:
           name: Upload to GitHub
           command: |
