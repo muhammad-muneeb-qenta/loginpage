@@ -15,21 +15,9 @@ jobs:
       - browser-tools/install-browser-tools
       - node/install-packages
       - run:
-          name: Upload to GitHub
           command: npm run test
-            if [ $? -eq 0 ]; then
-              # Tests passed, upload to GitHub
-              git config user.name "CircleCI"
-              git config user.email "<muhammad.muneeb@qenta.com>"
-              git add .
-              git commit -m "Passed tests [skip ci]"
-              git push origin HEAD:master
-            else
-              # Tests failed, exit with a non-zero code
-              exit 1
-            fi
-       - store_test_results:
-           path: /tests_output
+      - store_test_results:
+          path: /tests_output
 workflows:
   e2e-test:
     jobs:
