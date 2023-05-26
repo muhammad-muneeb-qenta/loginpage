@@ -14,7 +14,6 @@ jobs:
       - checkout
       - browser-tools/install-browser-tools
       - node/install-packages
-      - run: npm install
       - run: npm run test
       - if: ${{ failure() }}
         run: echo "Tests failed, aborting build"
