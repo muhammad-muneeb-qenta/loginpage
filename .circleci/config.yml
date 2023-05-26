@@ -18,20 +18,21 @@ jobs:
           command: npm run test
       - store_test_results:
           path: /tests_output
-      - run:
-          name: Upload to GitHub
+     - run:
+          name: Check Test Result
           command: |
             if [ $? -eq 0 ]; then
-              # Tests passed, upload to GitHub
-              git config user.name "CircleCI"
-              git config user.email "<YOUR_EMAIL>"
-              git add .
-              git commit -m "Passed tests [skip ci]"
-              git push origin HEAD:master
+              echo "Tests passed, proceeding with code upload"
             else
-              # Tests failed, exit with a non-zero code
-              exit 1
+              echo "Tests failed, code upload aborted"
+              circleci step halt
             fi
+
+      # Deployment step to push code to GitHub
+      - deploy:
+          name: Upload to GitHub
+          command: |
+            # Add commands to push code to GitHub branch here
 workflows:
   e2e-test:
     jobs:
