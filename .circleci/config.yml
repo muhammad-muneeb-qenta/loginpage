@@ -24,8 +24,8 @@ jobs:
             if [ $? -eq 0 ]; then
               echo "Tests passed, proceeding with code upload"
             else
-              echo "Tests failed, code upload aborted"
               echo "Tests failed, preventing pull request creation"
+              echo "Tests failed, code upload aborted"
               curl -X POST -H "Content-Type: application/json" \
                 -H "Accept: application/vnd.github.v3+json" \
                 -H "Authorization: Bearer $GITHUB_TOKEN" \
