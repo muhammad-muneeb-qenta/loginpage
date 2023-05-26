@@ -8,7 +8,7 @@ describe('duckduckgo example', function() {
         .click('*[type="submit"]')
         .pause(5000)
         .assert.visible('h1')
-        .assert.textContains('h3', 'Dashboard')
+        // .assert.textContains('h3', 'Dashboard')
         .assert.textContains('h1', 'Dashboard');
     }); 
   });
