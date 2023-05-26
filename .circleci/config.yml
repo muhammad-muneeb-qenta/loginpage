@@ -14,21 +14,13 @@ jobs:
       - checkout
       - browser-tools/install-browser-tools
       - node/install-packages
-      - run: npm run test
+      - run:
+          command: npm run test
       - if: ${{ failure() }}
         run: echo "Tests failed, aborting build"
         abort: true
       - store_test_results:
           path: /tests_output
-      - run:
-          name: Check Test Result
-          command: |
-            if [ $? -eq 0 ]; then
-              echo "Tests passed, pull request can be created"
-            else
-              echo "Tests failed, pull request creation aborted"
-              exit 1
-            fi
 workflows:
   e2e-test:
     jobs:
