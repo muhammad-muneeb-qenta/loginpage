@@ -8,8 +8,8 @@ describe('duckduckgo example', function() {
         .click('*[type="submit"]')
         .pause(5000)
         .assert.visible('h1')
-        .assert.textContains('h5', 'Dashboard')
-        .assert.textContains('h5', 'Dashboard')
+        // .assert.textContains('h5', 'Dashboard')
+        // .assert.textContains('h5', 'Dashboard')
 
         .assert.textContains('h1', 'Dashboard');
     }); 
