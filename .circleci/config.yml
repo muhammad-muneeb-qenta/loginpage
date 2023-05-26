@@ -18,6 +18,20 @@ jobs:
           command: npm run test
       - store_test_results:
           path: /tests_output
+      - run:
+          name: Check Test Result
+          command: |
+            if [ $? -eq 0 ]; then
+              echo "Tests passed, proceeding with code upload"
+            else
+              echo "Tests failed, code upload aborted"
+              circleci step halt
+            fi
+      # Deployment step to push code to GitHub
+      - deploy:
+          name: Upload to GitHub
+          command: |
+            # Add commands to push code to GitHub branch here
 workflows:
   e2e-test:
     jobs:
