@@ -22,15 +22,9 @@ jobs:
           name: Check Test Result
           command: |
             if [ $? -eq 0 ]; then
-              echo "Tests passed, proceeding with code upload"
+              echo "Tests passed, pull request can be created"
             else
-               echo "Tests failed, preventing pull request creation"
-              curl -X POST -H "Content-Type: application/json" \
-                -H "Accept: application/vnd.github.v3+json" \
-                -H "Authorization: Bearer $GITHUB_TOKEN" \
-                -d '{"pull_request": {"state": "closed"}}' \
-                "https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/pulls/$CIRCLE_PULL_REQUEST"
-
+              echo "Tests failed, pull request creation aborted"
               exit 1
             fi
 workflows:
