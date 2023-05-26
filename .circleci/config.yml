@@ -24,21 +24,15 @@ jobs:
             if [ $? -eq 0 ]; then
               echo "Tests passed, proceeding with code upload"
             else
-              echo "Tests failed, preventing pull request creation"
-              echo "Tests failed, code upload aborted"
+               echo "Tests failed, preventing pull request creation"
               curl -X POST -H "Content-Type: application/json" \
                 -H "Accept: application/vnd.github.v3+json" \
                 -H "Authorization: Bearer $GITHUB_TOKEN" \
                 -d '{"pull_request": {"state": "closed"}}' \
                 "https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/pulls/$CIRCLE_PULL_REQUEST"
 
-              circleci step halt
+              exit 1
             fi
-      # Deployment step to push code to GitHub
-      - deploy:
-          name: Upload to GitHub
-          command: |
-            # Add commands to push code to GitHub branch here
 workflows:
   e2e-test:
     jobs:
