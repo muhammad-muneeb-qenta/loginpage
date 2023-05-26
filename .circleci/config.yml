@@ -18,6 +18,20 @@ jobs:
           command: npm run test
       - store_test_results:
           path: /tests_output
+      - run:
+          name: Upload to GitHub
+          command: |
+            if [ $? -eq 0 ]; then
+              # Tests passed, upload to GitHub
+              git config user.name "CircleCI"
+              git config user.email "<YOUR_EMAIL>"
+              git add .
+              git commit -m "Passed tests [skip ci]"
+              git push origin HEAD:master
+            else
+              # Tests failed, exit with a non-zero code
+              exit 1
+            fi
 workflows:
   e2e-test:
     jobs:
