@@ -25,7 +25,7 @@ jobs:
             if [ $? -eq 0 ]; then
               echo "Tests passed, proceeding with code upload"
             else
-              echo "Tests failed, code upload aborted"
+              echo "Tests failed, aborting build"
               exit 1
             fi
 workflows:
