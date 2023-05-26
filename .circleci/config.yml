@@ -1,3 +1,4 @@
+
 # This config is equivalent to both the '.circleci/extended/orb-free.yml' and the base '.circleci/config.yml'
 version: 2.1
 
@@ -17,7 +18,16 @@ jobs:
       - run:
           command: npm run test
       - store_test_results:
-          path: /tests_output
+          path: ././tests_output
+      - run:
+          name: Check test results
+          command: |
+            if [ $? -eq 0 ]; then
+              echo "Tests passed, proceeding with code upload"
+            else
+              echo "Tests failed, code upload aborted"
+              exit 1
+            fi
 workflows:
   e2e-test:
     jobs:
