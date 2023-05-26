@@ -16,8 +16,7 @@ jobs:
       - node/install-packages
       - run:
           command: npm run test
-      - if: ${{ failure() }}
-        abort: true
+    
       - store_test_results:
           path: /tests_output
 workflows:
